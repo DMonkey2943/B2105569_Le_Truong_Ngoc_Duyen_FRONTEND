@@ -25,7 +25,7 @@
             <label for="favorite"><strong>Liên hệ yêu thích</strong></label>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary">Lưu</button>
+            <button class="btn btn-primary" @click="submitContact">Lưu</button>
             <button v-if="contactLocal._id" type="button" class="ml-2 btn btn-danger" @click="deleteContact">Xóa</button>
             <button type="button" class="ml-2 btn btn-danger" @click="Cancel">Thoát</button>
         </div>
@@ -55,7 +55,7 @@ export default {
             email: yup
                 .string()
                 .email("E-mail không đúng.")
-                .max(50, "E-mail toois đa 50 ký tự"),
+                .max(50, "E-mail tối đa 50 ký tự"),
             address: yup.string().max(100, "Địa chỉ tối đa 100 ký tự."),
             phone: yup
                 .string()
@@ -74,7 +74,7 @@ export default {
             this.$emit("submit:contact", this.contactLocal);
         },
         deleteContact() {
-            this.$emit("delete:contact", this.contactLocal.id);
+            this.$emit("delete:contact", this.contactLocal._id);
         },
         Cancel() {
             const reply = window.confirm('You have unsaved changes! Do you want to leave?');
